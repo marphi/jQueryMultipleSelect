@@ -1,8 +1,10 @@
 /*
- fcbkListSelection 1.10
- - Jquery version required: 1.2.x, 1.3.x, 1.4.x
+ fcbkListSelection 2.0
+ - Jquery version: 1.4.x
+   - might work on: 1.2.x, 1.3.x, 
  
  Changelog:
+ - 2.0: revamp selector. Unobstrucive and AJAX data
  - 1.1: added preselected items
  - 1.0: project started
  */
@@ -13,4 +15,4 @@
  * width - width of ul
  * height - height of each element
  * row - number of items in row
- */
+ */⎷
