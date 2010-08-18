@@ -6,6 +6,11 @@
   border-style: none solid solid;
   border-width: medium 1px 1px;
 }
+.selectorwrapper .extra {
+  border-color: #C1C1C1;
+  border-style: none solid solid;
+  border-width: 0 1px 1px;
+}
 
 .selectorwrapper .selector .loading, .selectorwrapper .selector .error {
   padding-top:  20px;

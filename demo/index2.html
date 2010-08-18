@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>jQuery MultipleSelect plugin</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link type="text/css" rel="stylesheet" href="multipleselect.css" />
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="../lib/jquery.multipleselect.js"></script>
+<style type="text/css" media="screen">
+  body {
+    font-size:    11px;
+    text-align:   left;
+    font-family:  "lucida grande",tahoma,verdana,arial,sans-serif;
+  }
+  select[multiple] {
+    position: absolute;
+    left: 450px;
+  }
+  .selectorwrapper {
+    margin-right: 50px;
+  }
+  .selectorwrapper ul.list li.filtered {
+    display: none;
+  }
+  h2 {
+    clear: both;
+    padding-top: 40px;
+  }
+</style>
+</head>
+<body>
+<h1>Multiple select demo</h1>
+
+<h2>Select multiple without options with remote data</h2>
+<form action="" method="post">
+  <select id="list" multiple="multiple" name="list[]" data-selected="1,2,5">
+  </select>
+  <input type="submit" value="Submit" />
+</form>
+
+</body>
+<script type="text/javascript" language="JavaScript">
+    $(document).ready(function() {
+      $("#list").multipleSelect({
+        content: "list2.js",
+        extras: 'before'
+      });
+      
+      var selectorWrapper = $("#list")[0].selector;
+      var extraSelect = $('<select />');
+      
+      extraSelect.bind('change', function() {
+        var filter = $("option:selected", this).val().toString();
+        $("ul.list li", selectorWrapper).removeClass('filtered');
+        if (filter !== '' && filter !== null) {
+          $("ul.list li").each(function(){
+            if ($(this).data('extra')['groups'].indexOf(filter) == -1) {
+              $(this).addClass('filtered');
+            }
+          })
+        }
+      });
+      
+      $([['', 'All'],[1, "One"],[2, "Two"],[3, "Three"],[4, "Four"],[5, "Five"]]).each(function() {
+        extraSelect.append('<option value="'+ this[0] +'">'+ this[1] +'</option>');
+      })
+      
+      var selectAll = $("<a>select all</a>").click(function() {
+        $("ul.list li:visible.notselected", $(this).parents('.selectorwrapper')).click()
+      })
+      var deselectAll = $("<a>unselect all</a>").click(function() {
+        $("ul.list li:visible.selected", $(this).parents('.selectorwrapper')).click()
+      })
+      
+      $('.extra', selectorWrapper).append(extraSelect);
+      $('.extra', selectorWrapper).append(selectAll);
+      $('.extra', selectorWrapper).append(deselectAll);
+      
+      
+      
+      setTimeout(function() { $("#list").show() }, 2);
+      
+      $("form").submit(function(e) {
+        e.preventDefault();
+        alert(unescape($(this).serialize()));
+      })
+      
+    });
+</script>
+</html>
