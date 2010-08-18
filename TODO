@@ -1,0 +1,6 @@
+* Handle large data sets (+2000 items)
+* Allow the "buildSelectItem" to be defined by the user, giving access to the data from the ajax request if applicable
+* Better error handling
+* make provided css work with IE7+
+* i18n
+* jQuery UI compatible (theme roller?) (do be discussed)

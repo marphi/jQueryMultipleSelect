@@ -1,0 +1,85 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title>jQuery MultipleSelect plugin</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link type="text/css" rel="stylesheet" href="multipleselect.css" />
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="../lib/jquery.multipleselect.js"></script>
+<style type="text/css" media="screen">
+  body {
+    font-size:    11px;
+    text-align:   left;
+    font-family:  "lucida grande",tahoma,verdana,arial,sans-serif;
+  }
+  select {
+    position: absolute;
+    left: 450px;
+  }
+  .selectorwrapper {
+    margin-right: 50px;
+  }
+  h2 {
+    clear: both;
+    padding-top: 40px;
+  }
+</style>
+</head>
+<body>
+<h1>Multiple select demo</h1>
+
+<h2>Select multiple into fancy select</h2>
+<form action="" method="post">
+  <select id="list" multiple="multiple" name="list[]">
+    <option value="1" selected="selected">Bert</option>
+    <option value="2" >Ernie</option>
+    <option value="3" selected="selected">Big Bird</option>
+    <option value="4" >Grover</option>
+    <option value="5" >Count von Count</option>
+    <option value="6" >Elmo</option>
+    <option value="7" >Oscar the Grouch</option>
+    <option value="8" >Kermit</option>
+    <option value="9" >Cookie Monster</option>
+    <option value="10" >Animal</option>
+  </select>
+  <select id="list4" multiple="multiple" name="list4[]">
+    <option value="1" selected="selected">Pie</option>
+    <option value="2" >Chocolate</option>
+  </select>
+  <input type="submit" value="Submit" />
+</form>
+
+<h2>Select multiple without options with remote data</h2>
+<form action="" method="post">
+  <select id="list2" multiple="multiple" name="list2[]" data-selected="1,2,5">
+  </select>
+  <input type="submit" value="Submit" />
+</form>
+
+<h2>Select multiple without data, failing data</h2>
+<form action="" method="post">
+  <select id="list3" multiple="multiple" name="list3[]" data-selected="1,2,5">
+  </select>
+  <input type="submit" value="Submit" />
+</form>
+
+</body>
+<script type="text/javascript" language="JavaScript">
+    $(document).ready(function() {
+      $("#list, #list4").multipleSelect();
+      $("#list2").multipleSelect({
+        content: "list.js"
+      });
+      $("#list3").multipleSelect({
+        content: "http://foo.bar/no"
+      });
+      setTimeout(function() { $("#list, #list2, #list3, #list4").show() }, 2);
+      
+      $("form").submit(function(e) {
+        e.preventDefault();
+        alert(unescape($(this).serialize()));
+      })
+      
+    });
+</script>
+</html>
