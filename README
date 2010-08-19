@@ -1,5 +1,7 @@
 Multiple select plugin
 
+Version: 1.0.alpha.2010:08:19-0
+
 Coded by: Bert Goethals (@bertgoethals)
 Licence: Distributed under MIT
 
@@ -14,3 +16,6 @@ Features:
 * customisable item rendering
 
 Inspired from emposha <admin@emposha.com> original work on fcbkListSelection. Still using the same look'n feel from that project.
+
+On the version numbering: It is of following schema: version.major[.minor][.beta/alpha tag][.date-#
+]
