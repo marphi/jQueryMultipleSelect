@@ -11,5 +11,6 @@ Features:
 * live bindings
 * 100% css styled (not tested under IE)
 * select all / unselect all links above or under the collection
+* customisable item rendering
 
 Inspired from emposha <admin@emposha.com> original work on fcbkListSelection. Still using the same look'n feel from that project.

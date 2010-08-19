@@ -43,7 +43,8 @@
     $(document).ready(function() {
       $("#list").multipleSelect({
         content: "list2.js",
-        extras: 'before'
+        extras: 'before',
+        selectAllNone: false
       });
       
       var selectorWrapper = $("#list")[0].selector;

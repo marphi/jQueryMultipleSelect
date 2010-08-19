@@ -19,6 +19,13 @@
   .selectorwrapper {
     margin-right: 50px;
   }
+  .selectorwrapper img {
+    background-color: #FFF;
+    border: 1px solid #ccc;
+    float: left;
+    margin-right: 3px;
+    padding: 2px;
+  }
   h2 {
     clear: both;
     padding-top: 40px;
@@ -69,7 +76,14 @@
       $("#list, #list4").multipleSelect();
       $("#list2").multipleSelect({
         content: "list.js",
-        extras: 'before'
+        contentText: 'name',
+        extras: 'before',
+        selectItem: function(item) {
+                      var selectItem = $('<div />');
+                      selectItem.append($('<strong />').text(item.optionText));
+                      selectItem.prepend($('<img />').attr('src', item.img));
+                      return selectItem.html();
+                    }
       });
       $("#list3").multipleSelect({
         content: "http://foo.bar/no"

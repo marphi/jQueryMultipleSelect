@@ -1,37 +1,37 @@
 [
   {
     "value": 0,
-    "name": "Bert",
+    "text": "Bert",
     "groups": ["1", "2"]
   },
   {
     "value": 1,
-    "name": "Johan",
+    "text": "Johan",
     "groups": ["3", "2"]
   },
   {
     "value": 2,
-    "name": "Andrew",
+    "text": "Andrew",
     "groups": ["2"]
   },
   {
     "value": 3,
-    "name": "Amaury",
+    "text": "Amaury",
     "groups": ["1", "2"]
   },
   {
     "value": 4,
-    "name": "Edouard",
+    "text": "Edouard",
     "groups": ["4"]
   },
   {
     "value": 5,
-    "name": "Antoine",
+    "text": "Antoine",
     "groups": ["3"]
   },
   {
     "value": 6,
-    "name": "Thierry",
+    "text": "Thierry",
     "groups": ["1", "4"]
   }
 ]
