@@ -10,6 +10,12 @@
   border-color: #C1C1C1;
   border-style: none solid solid;
   border-width: 0 1px 1px;
+  padding: 5px;
+}
+.selectorwrapper .extra a {
+  cursor:           pointer;
+  color:            #3B5998;
+  text-decoration:  none;
 }
 
 .selectorwrapper .selector .loading, .selectorwrapper .selector .error {
