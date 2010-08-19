@@ -17,5 +17,4 @@ Features:
 
 Inspired from emposha <admin@emposha.com> original work on fcbkListSelection. Still using the same look'n feel from that project.
 
-On the version numbering: It is of following schema: version.major[.minor][.beta/alpha tag][.date-#
-]
+On the version numbering: It is of following schema: version.major[.minor][.beta/alpha tag][.date-#]
