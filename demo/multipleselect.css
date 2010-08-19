@@ -89,14 +89,6 @@
   margin:           0px;
   padding:          0px;
 }
-.selectorwrapper .filters .selections:after {
-  content:      ".";
-  display:      block;
-  clear:        both;
-  visibility:   hidden;
-  line-height:  0;
-  height:       0;
-}
 .selectorwrapper .filters .selections li.view_on {
   background: #ccc;
 }
@@ -108,4 +100,26 @@
   cursor:           pointer;
   color:            #3B5998;
   text-decoration:  none;
+}
+
+
+.clearfix:after {
+	content: ".";
+	display: block;
+	clear: both;
+	visibility: hidden;
+	line-height: 0;
+	height: 0;
+}
+
+.clearfix {
+	display: inline-block;
+}
+
+html[xmlns] .clearfix {
+	display: block;
+}
+
+* html .clearfix {
+	height: 1%;
 }
