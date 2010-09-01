@@ -5,6 +5,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link type="text/css" rel="stylesheet" href="multipleselect.css" />
 <script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="../lib/jquery.textchange.js"></script>
 <script type="text/javascript" src="../lib/jquery.multipleselect.js"></script>
 <style type="text/css" media="screen">
   body {
@@ -76,22 +77,25 @@
         $("ul.list li:visible.selected", $(this).parents('.selectorwrapper')).click()
       })
       
-      var search = $('<input type="search" placeholder="search" />').bind('keyup', function() {
-        console.log("search for: " + $(this).val());
-        var searchQuery = $(this).val();
-        $("ul.list li", $(this).parents('.selectorwrapper')).each(function() {
-          if ($(this).text().indexOf(searchQuery) == -1) {
-            $(this).addClass('search_filter')
-          } else {
-            $(this).removeClass('search_filter');
-          }
-        })
-        
-      })
+      var search = $('<input type="search" placeholder="search" />').bind('textchange', function (event, previousText) {
+        var searchQuery = $(this).val().toLowerCase();
+        if (!(previousText === undefined && searchQuery === '')) {
+          $("ul.list li", $(this).parents('.selectorwrapper')).each(function() {
+            if ($(this).text().toLowerCase().indexOf(searchQuery) == -1) {
+              $(this).addClass('search_filter');
+            } else {
+              $(this).removeClass('search_filter');
+            }
+          });
+        }
+      });
       
       $('.extra', selectorWrapper).append(extraSelect);
+      $('.extra', selectorWrapper).append(" | ");
       $('.extra', selectorWrapper).append(selectAll);
+      $('.extra', selectorWrapper).append(" | ");
       $('.extra', selectorWrapper).append(deselectAll);
+      $('.extra', selectorWrapper).append(" | ");
       $('.extra', selectorWrapper).append(search);
       
       
