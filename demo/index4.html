@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>jQuery MultipleSelect plugin</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link type="text/css" rel="stylesheet" href="multipleselect.css" />
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="jquery.lazyload.js"></script>
+<script type="text/javascript" src="jquery.textchange.js"></script>
+<script type="text/javascript" src="../lib/jquery.multipleselect.js"></script>
+<style type="text/css" media="screen">
+  body {
+    font-size:    11px;
+    text-align:   left;
+    font-family:  "lucida grande",tahoma,verdana,arial,sans-serif;
+  }
+  select[multiple] {
+    position: absolute;
+    left: 450px;
+  }
+  .selectorwrapper {
+    margin-right: 50px;
+  }
+  .selectorwrapper ul.list li.filtered {
+    display: none;
+  }
+  .selectorwrapper ul.list li.search_filter {
+    display: none;
+  }
+  .selectorwrapper img {
+    background-color: #FFF;
+    border: 1px solid #ccc;
+    float: left;
+    margin-right: 3px;
+    padding: 2px;
+  }
+  h2 {
+    clear: both;
+    padding-top: 40px;
+  }
+</style>
+</head>
+<body>
+<h1>Multiple select demo</h1>
+
+<h2>Select multiple without with remote data, thumbnails (lazy loaded) and filters</h2>
+<form action="" method="post">
+  <select id="list" multiple="multiple" name="list[]" data-selected="1,2,5">
+  </select>
+  <input type="submit" value="Submit" />
+</form>
+
+</body>
+<script type="text/javascript" language="JavaScript">
+    $(document).ready(function() {
+      $("#list").multipleSelect({
+        content: "list4.js",
+        contentText: 'name',
+        extras: 'before',
+        selectItem: function(item) {
+                      var selectItem = $('<div />');
+                      selectItem.append($('<strong />').text(item.optionText));
+                      selectItem.prepend($('<img />').attr('src', 'blank.gif').attr('data-original', item.img));
+                      return selectItem.html();
+                    },
+        onloaded: function(wrapper) {
+          $("img").lazyload({         
+            placeholder : "blank.gif",
+            container: wrapper,
+            effect : "fadeIn"
+          });
+        },
+        selectAllNone: false
+      });
+      var selectorWrapper = $("#list")[0].selector;
+      var extraSelect = $('<select />');
+      
+      extraSelect.bind('change', function() {
+        var filter_data = $("option:selected", this).attr('class');
+        var filter = $("option:selected", this).val().toString();
+        $("ul.list li", selectorWrapper).removeClass('filtered');
+        if (filter !== '' && filter !== null) {
+          $("ul.list li").each(function(){
+            if ($(this).data('extra')[filter_data].indexOf(filter) == -1) {
+              $(this).addClass('filtered');
+            }
+          })
+          $("ul.list", selectorWrapper).animate({scrollTop: 0}, 'fast', function(){
+            $(this).trigger('scroll');
+          });
+        }
+      });
+      
+      filter_data = [
+        [['Groups',       'groups'],      [[1, "One"],[2, "Two"],[3, "Three"],[4, "Four"],[5, "Five"]]],
+        [['Member lists', 'memberlists'], [[1, "One2"],[2, "Two2"],[3, "Three2"],[4, "Four2"],[5, "Five2"]]]
+      ]
+      
+      extraSelect.append('<option value="0">All</option>');
+      $(filter_data).each(function() {
+        var class_name = this[0][1].toLowerCase();
+        extraSelect.append('<optgroup label="'+ this[0][0] +'">');
+        $(this[1]).each(function() {
+          extraSelect.append('<option value="'+ this[0] +'" class="'+ class_name +'">'+ this[1] +'</option>');
+        })
+        extraSelect.append('</optgroup>');
+      })
+      
+      var selectAll = $("<a>select all</a>").click(function() {
+        $("ul.list li:visible.notselected", $(this).parents('.selectorwrapper')).click()
+      })
+      var deselectAll = $("<a>unselect all</a>").click(function() {
+        $("ul.list li:visible.selected", $(this).parents('.selectorwrapper')).click()
+      })
+      
+      
+      var search = $('<input type="search" placeholder="search" />').bind('textchange', function (event, previousText) {
+        var searchQuery = $(this).val().toLowerCase();
+        if (!(previousText === undefined && searchQuery === '')) {
+          $("ul.list li", $(this).parents('.selectorwrapper')).each(function() {
+            if ($(this).text().toLowerCase().indexOf(searchQuery) == -1) {
+              $(this).addClass('search_filter');
+            } else {
+              $(this).removeClass('search_filter');
+            }
+          });
+          $("ul.list", selectorWrapper).animate({scrollTop: 0}, 'fast', function(){
+            $(this).trigger('scroll');
+          });
+        }
+      });
+      
+      $('.extra', selectorWrapper).append(extraSelect);
+      $('.extra', selectorWrapper).append(" | ");
+      $('.extra', selectorWrapper).append(selectAll);
+      $('.extra', selectorWrapper).append(" | ");
+      $('.extra', selectorWrapper).append(deselectAll);
+      $('.extra', selectorWrapper).append(" | ");
+      $('.extra', selectorWrapper).append(search);
+            
+      $("form").submit(function(e) {
+        e.preventDefault();
+        alert(unescape($(this).serialize()));
+      })
+      
+    });
+</script>
+</html>
