@@ -39,7 +39,7 @@
 <form action="" method="post">
   <select id="list" multiple="multiple" name="list[]">
     <option value="1" selected="selected">Bert</option>
-    <option value="2" >Ernie</option>
+    <option value="2" disabled="disabled">Ernie</option>
     <option value="3" selected="selected">Big Bird</option>
     <option value="4" >Grover</option>
     <option value="5" >Count von Count</option>
@@ -58,7 +58,7 @@
 
 <h2>Select multiple without options with remote data</h2>
 <form action="" method="post">
-  <select id="list2" multiple="multiple" name="list2[]" data-selected="1,2,5">
+  <select id="list2" multiple="multiple" name="list2[]" data-selected="1,2,5" data-disabled="3">
   </select>
   <input type="submit" value="Submit" />
 </form>
@@ -77,6 +77,7 @@
       $("#list2").multipleSelect({
         content: "list.js",
         contentText: 'name',
+        contentDisable: 'disable',
         extras: 'before',
         selectItem: function(item) {
                       var selectItem = $('<div />');

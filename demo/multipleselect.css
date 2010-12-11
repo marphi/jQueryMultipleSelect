@@ -56,14 +56,21 @@
   overflow:         hidden;
   margin:           2px;
   padding:          2px;
+  cursor:			pointer;
 }
 .selectorwrapper ul.list li:hover .selector_item {
   background-color: white !important;
 }
 .selectorwrapper ul.list li.selected .selector_item {
-  border:           1px solid #149525 !important;
+  border:           1px solid #149525;
   background-color: #D7F8AC !important;
   position:         relative;
+}
+
+.selectorwrapper ul.list li.disabled .selector_item {
+  opacity:			0.5;
+  cursor:			default !important;
+  background-color: #F7F7F7 !important;
 }
 .selectorwrapper ul.list li .radical {
   display: none;
